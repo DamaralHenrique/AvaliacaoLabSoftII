@@ -7,7 +7,7 @@ import json
 from ingresso_app.models import Estadio, Ingresso
 
 @api_view(['GET'])
-def lugares(request: HttpRequest):
+def lugares(request):
     """
     Pega informações de estádios.
 
@@ -44,17 +44,17 @@ def lugares(request: HttpRequest):
         if(not has_reserva):
             ingressos.append({
                 "assento": i,
-                "status": 1,
-                "nome": x.cliente
+                "status": 0,
+                "nome": ""
                 })
         else:
             ingressos.append({
                 "assento": i,
-                "status": 0,
-                "nome": ""
+                "status": 1,
+                "nome": x.cliente
                 })
         i += 1
 
     print(ingressos)
 
-    return ingressos
+    return Response(ingressos)
